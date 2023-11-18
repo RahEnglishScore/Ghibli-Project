@@ -136,15 +136,14 @@ def test_movie_list_endpoint():
 
 def test_caching_in_fetch_actor_details():
     url = "http://example.com"
-    actor_data = [
-        {
-            "id": "1",
-            "name": "Actor 1",
-            "species": "http://example.com/species",
-            "url": "http://example.com/actor",
-        }
-    ]
-    cache.set(url, actor_data)
+    actor_data = {
+        "id": "1",
+        "name": "Actor 1",
+        "species": "http://example.com/species",
+        "url": "http://example.com/actor",
+    }
+
+    cache.set(url, [Actor.model_validate(actor_data)])
 
     actors = asyncio.run(fetch_actor_details(url))
     assert len(actors) == 1

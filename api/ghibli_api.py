@@ -38,19 +38,17 @@ async def fetch_actor_details(actor_url: HttpUrl) -> List[Actor]:
     # Check if the actor details are in the cache
     cached_data = cache.get(url_str)
     if cached_data:
-        return [Actor.model_validate(actor) for actor in cached_data]
+        return cached_data
 
     # If not in cache, fetch the data
     async with httpx.AsyncClient() as client:
         response = await client.get(url_str)
         response.raise_for_status()
-        actor_data = response.json()
+
+        actor_details = [Actor.model_validate(actor) for actor in response.json()]
 
         # Cache the data
         # This is useful for when the same actor appears in multiple films
-        cache.set(url_str, actor_data)
+        cache.set(url_str, actor_details)
 
-        if isinstance(actor_data, list):
-            return [Actor.model_validate(actor) for actor in actor_data]
-        else:
-            return [Actor.model_validate(actor_data)]
+        return actor_details
