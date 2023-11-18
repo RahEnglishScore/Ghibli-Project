@@ -5,6 +5,7 @@ import httpx
 import pytest
 from django.core.cache import cache
 from django.urls import reverse
+from django.conf import settings
 from rest_framework.test import APIClient
 
 from api.data_processing import combine_film_and_actors
@@ -126,9 +127,7 @@ def test_movie_list_endpoint():
         mock_fetch_films.return_value = []
         mock_combine.return_value = []
 
-        response = client.get(
-            url, HTTP_GHIBLIKEY="a2q22_k*t#2cnm&k&6i^pa61au7#52tg1my(8v&9=c8j#ex(xm"
-        )
+        response = client.get(url, HTTP_GHIBLIKEY=settings.GHIBLI_API_KEY)
 
         assert response.status_code == 200
         mock_fetch_films.assert_called_once()
