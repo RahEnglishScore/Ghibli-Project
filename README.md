@@ -13,8 +13,8 @@ This Django project interfaces with the Ghibli API to serve movie and actor info
 ## Setup
 1. **Clone and Navigate**: 
    ```bash
-   git clone <repository-url>
-   cd <project-directory>
+   git clone https://github.com/RahEnglishScore/Ghibli-Project
+   cd Ghibli-Project
    ```
 2. **Virtual Environment**:
    ```bash
