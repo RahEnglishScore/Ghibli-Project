@@ -38,6 +38,7 @@ This Django project interfaces with the Ghibli API to serve movie and actor info
 - **`models.py`**: Defines Pydantic models for data structure.
 - **`authentication.py`**: Manages API key authentication.
 - **`ghibli_api.py`**: Contains async functions for external API interactions.
+- **`data_processing.py`**: Contains functions for data processing.
 - **`tests`**: Directory for pytest-based tests.
 
 ## Running Tests
